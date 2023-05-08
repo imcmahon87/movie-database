@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import Axios from 'axios';
 
 function App() {
+  const [movieData, setMovieData] = useState([]);;
+
+  useEffect(() => {
+    Axios.get('http://localhost:3002/getMovies').then((data) => {
+      setMovieData(data.data);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        {movieData.map((val, key) => {
+          return (
+            <div key={key}>
+              <p>{val.Title}, {val.Genre}, {val.Description}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
