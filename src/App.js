@@ -1,28 +1,39 @@
-import React, {useState, useEffect} from 'react';
-import Axios from 'axios';
+import React, {useState} from 'react';
+import MovieList from './components/MovieList';
+import MovieDetails from './components/MovieDetails';
+import GenreList from './components/GenreList';
+import DirectorList from './components/DirectorList';
+import './App.css';
 
 function App() {
-  const [movieData, setMovieData] = useState([]);;
 
-  useEffect(() => {
-    Axios.get('http://localhost:3002/getMovies').then((data) => {
-      setMovieData(data.data);
-    });
-  }, []);
+  const [view, setView] = useState({view: 'list', data: false});
 
-  return (
-    <div>
+  if (view.view === 'list') {
+    return (
       <div>
-        {movieData.map((val, key) => {
-          return (
-            <div key={key}>
-              <p>{val.Title}, {val.Genre}, {val.Description}</p>
-            </div>
-          );
-        })}
+        <MovieList viewChanger={setView} />
       </div>
-    </div>
-  );
+    );
+  } else if (view.view === 'details') {
+    return (
+      <div>
+        <MovieDetails viewChanger={setView} data={view.data} />
+      </div>
+    );
+  } else if (view.view === 'genre') {
+    return (
+      <div>
+        <GenreList viewchanger={setView} data={view.data} />
+      </div>
+    );
+  } else if (view.view === 'director') {
+    return (
+      <div>
+        <DirectorList viewchanger={setView} data={view.data} />
+      </div>
+    );
+  }
 }
 
 export default App;
