@@ -15,37 +15,34 @@ function MovieList(props) {
 
   function clickTitle(e) {
     let selection = e.target.id;
-    viewChanger({view: 'details', data: selection});
+    viewChanger({view: 'moviedetails', data: selection});
   }
 
   function clickGenre(e) {
     let selection = e.target.id;
-    viewChanger({view: 'genre', data: selection});
-  }
-
-  function clickDirector(e) {
-    let selection = e.target.id;
-    viewChanger({view: 'director', data: selection});
+    viewChanger({view: 'genrelist', data: selection});
   }
 
     return (
-        <div>
+        <div className="wrapper">
           <h2>All Movies</h2>
             <table>
             <thead>
                 <tr>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>Director</th>
+                <th className="columnTitle">Title</th>
+                <th className="columnDescription">Description</th>
+                <th className="columnYear">Year</th>
+                <th className="columnRuntime">Runtime</th>
                 </tr>
             </thead>
             <tbody>
                 {movieData.map((val, key) => {
                 return (
                     <tr key={key}>
-                    <td id={val.MovieID} onClick={(e) => {clickTitle(e);}}>{val.Title}</td>
-                    <td id={val.Genre} onClick={(e) => {clickGenre(e);}}>{val.Genre}</td>
-                    <td id={val.PersonID} onClick={(e) => {clickDirector(e);}}>{val.Director}</td>
+                    <td className="columnTitle" id={val.MovieID} onClick={(e) => {clickTitle(e);}}>{val.Title}</td>
+                    <td className="columnDescription">{val.Description}</td>
+                    <td className="columnYear">{val.Year}</td>
+                    <td className="columnRuntime">{val.Runtime} minutes</td>
                     </tr>
                 );
                 })}

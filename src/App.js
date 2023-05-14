@@ -2,35 +2,35 @@ import React, {useState} from 'react';
 import MovieList from './components/MovieList';
 import MovieDetails from './components/MovieDetails';
 import GenreList from './components/GenreList';
-import DirectorList from './components/DirectorList';
+import PersonDetails from './components/PersonDetails';
 import './App.css';
 
 function App() {
 
-  const [view, setView] = useState({view: 'list', data: false});
+  const [view, setView] = useState({view: 'movielist', data: false});
 
-  if (view.view === 'list') {
+  if (view.view === 'movielist') {
     return (
       <div>
-        <MovieList viewChanger={setView} />
+        <MovieList view="view" viewChanger={setView} />
       </div>
     );
-  } else if (view.view === 'details') {
+  } else if (view.view === 'moviedetails') {
     return (
       <div>
-        <MovieDetails viewChanger={setView} data={view.data} />
+        <MovieDetails view="view" viewChanger={setView} data={view.data} />
       </div>
     );
-  } else if (view.view === 'genre') {
+  } else if (view.view === 'genrelist') {
     return (
       <div>
-        <GenreList viewchanger={setView} data={view.data} />
+        <GenreList view="view" viewChanger={setView} data={view.data} />
       </div>
     );
-  } else if (view.view === 'director') {
+  } else if (view.view === 'persondetails') {
     return (
       <div>
-        <DirectorList viewchanger={setView} data={view.data} />
+        <PersonDetails view="view" viewChanger={setView} data={view.data} />
       </div>
     );
   }
