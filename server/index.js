@@ -17,13 +17,48 @@ app.get('/getAllMovies', (req, res) => {
     });
 });
 
+app.get('/searchMovies/:search', (req, res) => {
+    const search = '%' + req.params.search + '%';
+    db.query('SELECT    Title, ReleaseYear Year, Runtime, Description, MovieID \
+                        FROM movies \
+                        WHERE Title LIKE ?;', search, (err, result) => {
+    if (err) {
+        console.log(err);
+    }
+    res.send(result);
+    });
+});
+
+app.get('/getAllPeople', (req, res) => {
+    db.query('SELECT	LastName, FirstName, DATE_FORMAT(people.BirthDate, "%M %d, %Y") BirthDate, PersonID \
+              FROM	    people;', (err, result) => {
+    if (err) {
+        console.log(err);
+    }
+    res.send(result);
+    });
+});
+
+app.get('/searchPeople/:search', (req, res) => {
+    const search = '%' + req.params.search + '%';
+    db.query('SELECT    LastName, FirstName, DATE_FORMAT(people.BirthDate, "%M %d, %Y") BirthDate, PersonID \
+              FROM      people \
+              WHERE     LastName LIKE ? \
+              OR        FirstName LIKE ?;', [search, search], (err, result) => {
+    if (err) {
+        console.log(err);
+    }
+    res.send(result);
+    });
+});
+
 app.get('/getMovie/:id', (req, res) => {
     const id = req.params.id;
     db.query('SELECT    	Title, Description, movies.MovieID, movies.ReleaseYear, Runtime, \
                             p1.LastName dLastName, p1.FirstName dFirstName, p1.PersonID DirectorID, \
                             p2.LastName wLastName, p2.FirstName wFirstName, p2.PersonID WriterID, \
                             movieawards.MovieAward Award, movies_movieawards.Category, \
-                            movies_movieawards.Year AwardYear, genres.Genre \
+                            movies_movieawards.Year AwardYear, genres.Genre Genre, genres.GenreID GenreID \
                 FROM    	movies \
                 LEFT JOIN	movies_directors ON movies_directors.MovieID = movies.MovieID \
                 LEFT JOIN	people AS p1 ON p1.PersonID = movies_directors.PersonID \
@@ -43,10 +78,11 @@ app.get('/getMovie/:id', (req, res) => {
 
 app.get('/getGenre/:genre', (req, res) => {
     const genre = req.params.genre;
-    db.query('SELECT    Title, PersonName Director, Genre \
-              FROM      movie \
-              JOIN      person ON movie.DirectorID = person.PersonID \
-              WHERE     Genre = ?', genre, (err, result) => {
+    db.query('SELECT	Title, Description, movies.MovieID, genres.GenreID GenreID, genres.Genre Genre \
+              FROM		movies \
+              LEFT JOIN	movies_genres ON movies_genres.MovieID = movies.MovieID \
+              LEFT JOIN	genres ON genres.GenreID = movies_genres.GenreID \
+              WHERE		genres.GenreID = ?;', genre, (err, result) => {
         if (err) {
             console.log(err);
         }

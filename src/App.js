@@ -1,39 +1,81 @@
-import React, {useState} from 'react';
-import MovieList from './components/MovieList';
-import MovieDetails from './components/MovieDetails';
-import GenreList from './components/GenreList';
-import PersonDetails from './components/PersonDetails';
+import React, {useState, useEffect} from 'react';
+import DataViews from './components/DataViews';
 import './App.css';
 
 function App() {
 
-  const [view, setView] = useState({view: 'movielist', data: false});
+    const [view, setView] = useState('movielist');
+    const [search, setSearch] = useState('');
 
-  if (view.view === 'movielist') {
-    return (
-      <div>
-        <MovieList view="view" viewChanger={setView} />
-      </div>
-    );
-  } else if (view.view === 'moviedetails') {
-    return (
-      <div>
-        <MovieDetails view="view" viewChanger={setView} data={view.data} />
-      </div>
-    );
-  } else if (view.view === 'genrelist') {
-    return (
-      <div>
-        <GenreList view="view" viewChanger={setView} data={view.data} />
-      </div>
-    );
-  } else if (view.view === 'persondetails') {
-    return (
-      <div>
-        <PersonDetails view="view" viewChanger={setView} data={view.data} />
-      </div>
-    );
+    function validateInput(input) {
+      if (input.match(/^[0-9a-z]+$/)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    function searchMovies() {
+        let searchWord = document.getElementById('inputSearch').value;
+        let errorSpan = document.getElementById('validationError');
+        let inputValid = validateInput(searchWord);
+        if (inputValid) {
+          setSearch(searchWord);
+          setView('moviesearch');
+          errorSpan.innerHTML = '';
+        } else {
+          errorSpan.innerHTML = 'Error: Please enter only letters and numbers';
+        }
+    }
+
+    function searchPeople() {
+      let searchWord = document.getElementById('inputSearch').value;
+      let errorSpan = document.getElementById('validationError');
+      let inputValid = validateInput(searchWord);
+        if (inputValid) {
+          setSearch(searchWord);
+          setView('personsearch');
+          errorSpan.innerHTML = '';
+        } else {
+          errorSpan.innerHTML = 'Error: Please enter only letters and numbers';
+        }
   }
+
+    function onSubmit(event) {
+      event.preventDefault();
+      let searchWhat = document.getElementById('searchWhat').value;
+      if (searchWhat === 'movieTitle') {
+        searchMovies();
+      } else {
+        searchPeople();
+      }
+    }
+
+    return (
+      <div className="wrapper">
+        <h1>Movie and Crew Database</h1>
+        <h3>Search Keyword</h3>
+        <form id="searchForm" onSubmit={(e) => {onSubmit(e)}}>
+          <select name="searchWhat" id="searchWhat">
+            <option value="movieTitle">Movie Titles</option>
+            <option value="people">Directors/Writers</option>
+          </select>
+          <input id="inputSearch" type="text" />
+          <input className="buttonView" type="submit" value="Submit" />
+          <span id="validationError"></span>
+        </form>
+        <div className="buttonHolder">
+        <div className="buttonView" onClick={() => {setView('movielist')}}>
+          <p>View All Movies</p>
+        </div>
+        <div className="buttonView" onClick={() => {setView('personlist')}}>
+          <p>View All People</p>
+        </div>
+      </div>
+      <DataViews view={view} viewChanger={setView} data={search} />
+    </div>
+    );
+
 }
 
 export default App;

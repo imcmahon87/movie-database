@@ -12,7 +12,12 @@ h1, h2 {
     text-align: center;
 }
 
+.wrapper {
+    text-align: center;
+}
+
 table {
+    width: 100%;
     text-align: center;
     border-collapse: collapse;
 }
@@ -32,15 +37,115 @@ td {
     padding: 1em;
 }
 
+#sqlBox {
+    margin: 0 auto;
+    border-radius: 10px;
+    background: #f0f0f0;
+}
+
+#sqlBox p {
+    margin: 0;
+}
+
+#sqlView {
+    background: #dfdfdf;
+    border-radius: 10px;
+    padding: 0.5em;
+    cursor: pointer;
+    color: #0000ff;
+}
+
+#sqlResults {
+    padding: 1em;
+    text-align: left;
+    display: none;
+}
+
+#sqlResults table, #sqlResults tbody, #sqlResults th, #sqlResults tr, #sqlResults td {
+    vertical-align: top;
+    text-align: left;
+    border: none;
+    font-size: 12px;
+    font-family: monospace;
+    padding: 0 1em;
+}
+
+#sqlResults p {
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.clickable {
+    color: #0000ff;
+    cursor: pointer;
+}
+
+.buttonHolder {
+    margin: 1em auto;
+    width: fit-content;
+    text-align: center;
+}
+
+.buttonView {
+    margin: 0 1em 2em 1em;
+    background-color: #9595f5;
+    border-radius: 10px;
+    padding: 0.5em 1em;
+    display: inline-block;
+    cursor: pointer;
+    border: 0 solid black;
+}
+
+.buttonView p {
+    margin: 0;
+}
+
+select, input[type=text] {
+    display: block;
+    margin: 0 auto 1em auto;
+}
+
+input[type=submit] {
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+#validationError {
+    color: #ff0000;
+    display: block;
+    margin: 1em auto;
+    padding: 0;
+}
+
 @media only screen and (max-width: 600px) {
     .columnDescription {
         display: none;
+    }
+    #sqlBox {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    #sqlBox {
+        width: 80%;
+    }
+    .sqlLeft {
+        width: 20%;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    #sqlBox {
+        width: 75%;
+    }
+    .sqlLeft {
+        width: 25%;
     }
 }
 
 @media only screen and (min-width: 992px) {
     table {
-        width: 100%;
         table-layout: fixed;
     }
     .columnTitle {
@@ -59,6 +164,21 @@ td {
         width: 10%;
     }
     .columnRuntime {
+        width: 15%;
+    }
+    #sqlBox {
+        width: 75%;
+    }
+    .sqlLeft {
+        width: 20%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    #sqlBox {
+        width: 65%;
+    }
+    .sqlLeft {
         width: 15%;
     }
 }
