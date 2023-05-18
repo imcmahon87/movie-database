@@ -68,11 +68,7 @@ td {
     font-size: 12px;
     font-family: monospace;
     padding: 0 1em;
-}
-
-#sqlResults p {
-    font-size: 12px;
-    font-family: monospace;
+    line-height: 1.5;
 }
 
 .clickable {
@@ -124,6 +120,9 @@ input[type=submit] {
     #sqlBox {
         width: 100%;
     }
+    .sqlLeft {
+        min-width: 9em;
+    }
 }
 
 @media only screen and (min-width: 600px) {
@@ -132,6 +131,7 @@ input[type=submit] {
     }
     .sqlLeft {
         width: 20%;
+        min-width: 9em;
     }
 }
 
@@ -141,6 +141,7 @@ input[type=submit] {
     }
     .sqlLeft {
         width: 25%;
+        min-width: 9em;
     }
 }
 
@@ -166,19 +167,24 @@ input[type=submit] {
     .columnRuntime {
         width: 15%;
     }
+    /*
     #sqlBox {
         width: 75%;
     }
     .sqlLeft {
         width: 20%;
+        min-width: 30em;
     }
+    */
 }
 
 @media only screen and (min-width: 1200px) {
+    /*
     #sqlBox {
         width: 65%;
     }
     .sqlLeft {
-        width: 15%;
+        min-width: 12em;
     }
+    */
 }

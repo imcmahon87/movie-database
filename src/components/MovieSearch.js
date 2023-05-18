@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
+import SQLViewer from './SQLViewer';
 
 function MovieSearch(props) {
     const [movieData, setMovieData] = useState([{Title: 'Loading'}]); 
@@ -29,28 +30,29 @@ function MovieSearch(props) {
     } else {
         return (
             <div className="wrapper">
-            <h2>Movie Search</h2>
+                <SQLViewer query="moviesearch" data={props.data} />
+                <h2>Movie Search</h2>
                 <table>
-                <thead>
-                    <tr>
-                    <th className="columnTitle">Title</th>
-                    <th className="columnDescription">Description</th>
-                    <th className="columnYear">Year</th>
-                    <th className="columnRuntime">Runtime</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {movieData.map((val, key) => {
-                    return (
-                        <tr key={key}>
-                        <td className="columnTitle clickable" id={val.MovieID} onClick={(e) => {clickTitle(e);}}>{val.Title}</td>
-                        <td className="columnDescription">{val.Description}</td>
-                        <td className="columnYear">{val.Year}</td>
-                        <td className="columnRuntime">{val.Runtime} minutes</td>
+                    <thead>
+                        <tr>
+                        <th className="columnTitle">Title</th>
+                        <th className="columnDescription">Description</th>
+                        <th className="columnYear">Year</th>
+                        <th className="columnRuntime">Runtime</th>
                         </tr>
-                    );
-                    })}
-                </tbody>
+                    </thead>
+                    <tbody>
+                        {movieData.map((val, key) => {
+                        return (
+                            <tr key={key}>
+                            <td className="columnTitle clickable" id={val.MovieID} onClick={(e) => {clickTitle(e);}}>{val.Title}</td>
+                            <td className="columnDescription">{val.Description}</td>
+                            <td className="columnYear">{val.Year}</td>
+                            <td className="columnRuntime">{val.Runtime} minutes</td>
+                            </tr>
+                        );
+                        })}
+                    </tbody>
                 </table>
             </div>
         );

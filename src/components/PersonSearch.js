@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
+import SQLViewer from './SQLViewer';
 
 function PersonSearch(props) {
     const [movieData, setMovieData] = useState([{Title: 'Loading'}]);;
@@ -29,24 +30,25 @@ function PersonSearch(props) {
     } else {
         return (
             <div className="wrapper">
-            <h2>Person Search</h2>
+                <SQLViewer query="personsearch" data={props.data} />
+                <h2>Person Search</h2>
                 <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Birth Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {movieData.map((val, key) => {
-                        return (
-                            <tr key={key}>
-                                <td className="clickable" id={val.PersonID} onClick={(e) => {clickPerson(e)}}>{val.FirstName + ' ' + val.LastName}</td>
-                                <td>{val.BirthDate}</td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Birth Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {movieData.map((val, key) => {
+                            return (
+                                <tr key={key}>
+                                    <td className="clickable" id={val.PersonID} onClick={(e) => {clickPerson(e)}}>{val.FirstName + ' ' + val.LastName}</td>
+                                    <td>{val.BirthDate}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
                 </table>
             </div>
         );

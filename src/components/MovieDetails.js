@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
+import SQLViewer from './SQLViewer';
 
 function MovieDetails(props) {
     const [movieData, setMovieData] = useState([{Title: 'Loading'}]);
@@ -103,7 +104,8 @@ function MovieDetails(props) {
     }
 
     return (
-        <div>
+        <div className="wrapper">
+            <SQLViewer query="moviedetails" data={props.data} />
             <h2>{movieData[0].Title}</h2>
             <table>
                 <tbody>

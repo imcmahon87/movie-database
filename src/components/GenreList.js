@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
+import SQLViewer from './SQLViewer';
 
 function GenreList(props) {
 
@@ -23,7 +24,8 @@ function GenreList(props) {
     }
 
     return (
-        <div>
+        <div className="wrapper">
+            <SQLViewer query="genrelist" data={props.data} />
             <h2>{movieData[0].Genre}</h2>
             <table>
                 <thead>

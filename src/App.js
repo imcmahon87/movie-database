@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import DataViews from './components/DataViews';
 import './App.css';
 
@@ -8,7 +8,7 @@ function App() {
     const [search, setSearch] = useState('');
 
     function validateInput(input) {
-      if (input.match(/^[0-9a-z]+$/)) {
+      if (input.match(/^[0-9a-zA-Z]+$/)) {
         return true;
       } else {
         return false;
