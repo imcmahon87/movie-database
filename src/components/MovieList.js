@@ -3,10 +3,14 @@ import Axios from 'axios';
 import SQLViewer from './SQLViewer';
 
 function MovieList(props) {
-    const [movieData, setMovieData] = useState([{Title: 'Loading'}]);;
+    const [movieData, setMovieData] = useState([{Title: 'Loading', Genre: 'Loading', Description: 'Loading',
+                                                 MovieID: 'Loading', Name: 'Loading', Runtime: 'Loading',
+                                                 Year: 'Loading', FirstName: 'Loading', LastName: 'Data'}]);
+
+    //let movieData2 = [{MovieID: 1, Title: 'Test', Description: 'Another', Year: 2000, Runtime: 100}, {MovieID: 2, Title: 'Another test', Description: 'Description', Year: 2010, Runtime: 110}];
 
     useEffect(() => {
-      Axios.get('http://localhost:3002/getAllMovies')
+      Axios.get('https://iandeveloper.com:3001/getAllMovies')
         .then((data) => {
           setMovieData(data.data);
         })

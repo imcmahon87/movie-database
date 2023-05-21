@@ -3,10 +3,12 @@ import Axios from 'axios';
 import SQLViewer from './SQLViewer';
 
 function PersonList(props) {
-    const [movieData, setMovieData] = useState([{Title: 'Loading'}]);;
+    const [movieData, setMovieData] = useState([{Title: 'Loading', Genre: 'Loading', Description: 'Loading',
+                                                 MovieID: 'Loading', Name: 'Loading', Runtime: 'Loading',
+                                                 Year: 'Loading', FirstName: 'Loading', LastName: 'Data'}]);
 
     useEffect(() => {
-        Axios.get('http://localhost:3002/getAllPeople')
+        Axios.get('https://iandeveloper.com:3001/getAllPeople')
         .then((data) => {
             setMovieData(data.data);
         })
@@ -16,7 +18,7 @@ function PersonList(props) {
     const viewChanger = props.viewChanger;
 
     // For mapping from array to table entries
-    let people = [];
+    let people = [{name: 'Loading', birthDate: 'Loading'}];
     let person;
 
     // When a person's name is clicked

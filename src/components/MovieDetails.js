@@ -3,10 +3,12 @@ import Axios from 'axios';
 import SQLViewer from './SQLViewer';
 
 function MovieDetails(props) {
-    const [movieData, setMovieData] = useState([{Title: 'Loading'}]);
+    const [movieData, setMovieData] = useState([{Title: 'Loading', Genre: 'Loading', Description: 'Loading',
+                                                 MovieID: 'Loading', Name: 'Loading', Runtime: 'Loading',
+                                                 Year: 'Loading', FirstName: 'Loading', LastName: 'Data'}]);
 
     useEffect(() => {
-        Axios.get('http://localhost:3002/getMovie/' + props.data).then((data) => {
+        Axios.get('https://iandeveloper.com:3001/getMovie/' + props.data).then((data) => {
         setMovieData(data.data);
         });
         document.getElementById('validationError').innerHTML = '';

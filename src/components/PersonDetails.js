@@ -3,20 +3,22 @@ import Axios from 'axios';
 import SQLViewer from './SQLViewer';
 
 function PersonDetails(props) {
-    const [movieData, setMovieData] = useState([{LastName: 'Loading'}]);
+    const [movieData, setMovieData] = useState([{Title: 'Loading', Genre: 'Loading', Description: 'Loading',
+                                                 MovieID: 'Loading', Name: 'Loading', Runtime: 'Loading',
+                                                 Year: 'Loading', FirstName: 'Loading', LastName: 'Data'}]);
     const viewChanger = props.viewChanger;
 
     useEffect(() => {
-        Axios.get('http://localhost:3002/getPerson/' + props.data).then((data) => {
+        Axios.get('https://iandeveloper.com:3001/getPerson/' + props.data).then((data) => {
             setMovieData(data.data);
         });
         document.getElementById('validationError').innerHTML = '';
     }, [props.data]);
 
     // For mapping from array to table entries
-    let directed = [];
+    let directed = [{title: 'Loading'}];
     let movieDirected;
-    let wrote = [];
+    let wrote = [{title: 'Loading'}];
     let movieWrote;
 
     // When a movie title is clicked
